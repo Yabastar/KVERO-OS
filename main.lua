@@ -1,7 +1,7 @@
 sleep(0)
 shell.run("clear")
 print("Welcome to KVERO OS!")
-version = "016"
+version = "h016"
 print("version " .. version)
 location = "" -- to be used later
 inmain = 0
