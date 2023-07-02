@@ -1,6 +1,6 @@
 shell.run("clear")
 print("Welcome to KVERO OS!")
-print("version 00E")
+print("version 00F")
 location = "" -- to be used later
 inmain = 0
 
@@ -34,11 +34,20 @@ if installer == "1" then
     end
 end
 
+local currentDirectory = _G.SHARED and _G.SHARED.currentDirectory or ""
 
+-- Function to update and display the current directory
+local function updateCurrentDirectory()
+    currentDirectory = shell.dir() or ""
+    _G.SHARED = _G.SHARED or {}
+    _G.SHARED.currentDirectory = currentDirectory
+    print("Current directory: " .. currentDirectory)
+end
+
+updateCurrentDirectory()
 
 while true do
     io.write(location .. " > ")
-    print(_ENV._PWD)
     user = io.read()
     if inmain == 0 then
         if user == "mainshell" then
