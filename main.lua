@@ -13,7 +13,7 @@ local success, result = pcall(function()
 	shell.run("installer.lua")
 end)
 if not success then
-	installer == 1
+	installer = 1
 end
 
 if installer == 1 then
