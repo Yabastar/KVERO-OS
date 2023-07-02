@@ -6,9 +6,12 @@ inmain = 0
 local configFile = "config.txt"
 
 -- Read the installer state from the configuration file
-local file = io.open(configFile, "r")
-local installer = file and file:read() or "1"
-file:close()
+local installer = "1" -- Default value if the file doesn't exist
+if fs.exists(configFile) then
+    local file = io.open(configFile, "r")
+    installer = file:read()
+    file:close()
+end
 
 if installer == "1" then
     print("Try or install KVERO t/i")
@@ -20,7 +23,7 @@ if installer == "1" then
     end
     if res == "i" then
         -- Update the installer state in the configuration file
-        file = io.open(configFile, "w")
+        local file = io.open(configFile, "w")
         file:write("0")
         file:close()
         
