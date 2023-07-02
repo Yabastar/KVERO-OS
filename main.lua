@@ -1,6 +1,7 @@
 shell.run("clear")
 print("Welcome to KVERO OS!")
-print("version 011")
+version = "012"
+print("version " .. version)
 location = "" -- to be used later
 inmain = 0
 
@@ -40,7 +41,7 @@ while true do
     if inmain == 0 then
         if user == "mainshell" then
             inmain = 1
-        elseif user == "driver mod" then
+        if user == "driver mod" then
             print("KVERO driver mod")
             if drivers then
                 io.write("drivers exist, create new driver? y/n: ")
@@ -80,6 +81,10 @@ while true do
                     end
                     file:write("}")
                     file:close()
+        if user == "version" then
+            print(version)
+        end
+                    
                 end
             end
         end
