@@ -29,7 +29,7 @@ if installer == 1 then
 	if res == "i" then
 		file = io.open("installer.lua", "w")
 		file:write("installer = 0")
-		file:close
+		file:close()
 		installer = 0
 		io.open("startup.lua")
 		shell.run("cp /disk/* /startup.lua")
