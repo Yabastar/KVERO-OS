@@ -18,6 +18,7 @@ if installer == 1 then
 		end
 	end
 	if res == "i" then
+		installer = 0
 		io.open("startup.lua")
 		shell.run("cp /disk/* /startup.lua")
 	end
