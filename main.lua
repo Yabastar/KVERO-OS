@@ -9,6 +9,13 @@ else
 	installer = 1
 end
 
+local success, result = pcall(function()
+	shell.run("installer.lua")
+end)
+if not success then
+	installer == 1
+end
+
 if installer == 1 then
 	print("Try or install KVERO t/i")
 	while true do
@@ -18,6 +25,9 @@ if installer == 1 then
 		end
 	end
 	if res == "i" then
+		file = io.open("installer.lua", "w")
+		file:write("installer = 0")
+		file:close
 		installer = 0
 		io.open("startup.lua")
 		shell.run("cp /disk/* /startup.lua")
