@@ -8,9 +8,11 @@ local configFile = "config.txt"
 -- Read the installer state from the configuration file
 local installer = "1" -- Default value if the file doesn't exist
 if fs.exists(configFile) then
+    
     local file = io.open(configFile, "r")
     installer = file:read()
     file:close()
+    
 end
 
 if installer == "1" then
