@@ -1,6 +1,6 @@
 shell.run("clear")
 print("Welcome to KVERO OS!")
-print("version 00A")
+print("version 00B")
 location = "" -- to be used later
 inmain = 0
 
@@ -59,7 +59,7 @@ while true do
                         res1 = io.read()
                         drivers[res] = res1
                         file = io.open("drivers.lua", "w")
-                        file:write(drivers)
+                        file:write(tostring(drivers))
                         file:close()
                     end
                 else
@@ -73,7 +73,7 @@ while true do
                         drivers = {}
                         drivers[res] = res1
                         file = io.open("drivers.lua", "w")
-                        file:write(drivers)
+                        file:write(tostring(drivers))
                         file:close()
                     end
                 end
