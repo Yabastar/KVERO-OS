@@ -41,6 +41,7 @@ while true do
     if inmain == 0 then
         if user == "mainshell" then
             inmain = 1
+        end
         if user == "driver mod" then
             print("KVERO driver mod")
             if drivers then
@@ -81,14 +82,9 @@ while true do
                     end
                     file:write("}")
                     file:close()
-        if user == "version" then
-            print(version)
-        end
-                    
                 end
             end
         end
-
     else
         if user == "exit mainshell" then
             inmain = 0
