@@ -1,6 +1,6 @@
 shell.run("clear")
 print("Welcome to KVERO OS!")
-print("version 00D")
+print("version 00E")
 location = "" -- to be used later
 inmain = 0
 
@@ -31,9 +31,6 @@ if installer == "1" then
         -- Perform installation tasks
         io.open("startup.lua")
         shell.run("cp /disk/* /startup.lua")
-        local currentDirectory = shell.dir()
-
-        print(currentDirectory)
     end
 end
 
@@ -41,6 +38,7 @@ end
 
 while true do
     io.write(location .. " > ")
+    print(shell.dir())
     user = io.read()
     if inmain == 0 then
         if user == "mainshell" then
