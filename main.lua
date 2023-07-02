@@ -1,7 +1,7 @@
 sleep(0)
 shell.run("clear")
 print("Welcome to KVERO OS!")
-version = "h016"
+version = "h017"
 print("version " .. version)
 location = "" -- to be used later
 inmain = 0
@@ -89,6 +89,7 @@ while true do
             end
         elseif user == "version" then
             print("Current version: " .. version)
+            print("star it! https://github.com/Yabastar/KVERO-OS")
         end
     else
         if user == "exit mainshell" then
