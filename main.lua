@@ -35,6 +35,10 @@ if installer == "1" then
     end
 end
 
+local currentDirectory = shell.dir()
+
+print(currentDirectory)
+
 while true do
     io.write(location .. " > ")
     user = io.read()
