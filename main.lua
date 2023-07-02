@@ -31,12 +31,13 @@ if installer == "1" then
         -- Perform installation tasks
         io.open("startup.lua")
         shell.run("cp /disk/* /startup.lua")
+        local currentDirectory = shell.dir()
+
+        print(currentDirectory)
     end
 end
 
-local currentDirectory = shell.dir()
 
-print(currentDirectory)
 
 while true do
     io.write(location .. " > ")
