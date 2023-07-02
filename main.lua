@@ -1,3 +1,4 @@
+sleep(0)
 shell.run("clear")
 print("Welcome to KVERO OS!")
 version = "015"
