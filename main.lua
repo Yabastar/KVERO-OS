@@ -1,6 +1,6 @@
 shell.run("clear")
 print("Welcome to KVERO OS!")
-print("version 00F")
+print("version 010")
 location = "" -- to be used later
 inmain = 0
 
@@ -34,69 +34,56 @@ if installer == "1" then
     end
 end
 
-local currentDirectory = _G.SHARED and _G.SHARED.currentDirectory or ""
-
--- Function to update and display the current directory
-local function updateCurrentDirectory()
-    currentDirectory = shell.dir() or ""
-    _G.SHARED = _G.SHARED or {}
-    _G.SHARED.currentDirectory = currentDirectory
-    print("Current directory: " .. currentDirectory)
-end
-
-updateCurrentDirectory()
-
 while true do
     io.write(location .. " > ")
     user = io.read()
     if inmain == 0 then
         if user == "mainshell" then
             inmain = 1
-        else
-            if user == "driver mod" then
-                print("KVERO driver mod")
-                if drivers then
-                    io.write("drivers exist, create new driver? y/n: ")
+        elif user == "driver mod" then
+            print("KVERO driver mod")
+            if drivers then
+                io.write("drivers exist, create new driver? y/n: ")
+                res = io.read()
+                if res == "yes" or res == "y" then
+                    io.write("driver name: ")
                     res = io.read()
-                    if res == "yes" or res == "y" then
-                        io.write("driver name: ")
-                        res = io.read()
-                        io.write("driver file path: ")
-                        res1 = io.read()
-                        drivers[res] = res1
-                        
-                        -- Save the drivers table to a file
-                        local file = io.open("drivers.lua", "w")
-                        file:write("drivers = {\n")
-                        for k, v in pairs(drivers) do
-                            file:write('  ["' .. k .. '"] = "' .. v .. '",\n')
-                        end
-                        file:write("}")
-                        file:close()
+                    io.write("driver file path: ")
+                    res1 = io.read()
+                    drivers[res] = res1
+                    
+                    -- Save the drivers table to a file
+                    local file = io.open("drivers.lua", "w")
+                    file:write("drivers = {\n")
+                    for k, v in pairs(drivers) do
+                        file:write('  ["' .. k .. '"] = "' .. v .. '",\n')
                     end
-                else
-                    io.write("create new driver system? y/n: ")
+                    file:write("}")
+                    file:close()
+                end
+            else
+                io.write("create new driver system? y/n: ")
+                res = io.read()
+                if res == "yes" or res == "y" then
+                    io.write("driver name: ")
                     res = io.read()
-                    if res == "yes" or res == "y" then
-                        io.write("driver name: ")
-                        res = io.read()
-                        io.write("driver file path: ")
-                        res1 = io.read()
-                        drivers = {}
-                        drivers[res] = res1
-                        
-                        -- Save the drivers table to a file
-                        local file = io.open("drivers.lua", "w")
-                        file:write("drivers = {\n")
-                        for k, v in pairs(drivers) do
-                            file:write('  ["' .. k .. '"] = "' .. v .. '",\n')
-                        end
-                        file:write("}")
-                        file:close()
+                    io.write("driver file path: ")
+                    res1 = io.read()
+                    drivers = {}
+                    drivers[res] = res1
+                    
+                    -- Save the drivers table to a file
+                    local file = io.open("drivers.lua", "w")
+                    file:write("drivers = {\n")
+                    for k, v in pairs(drivers) do
+                        file:write('  ["' .. k .. '"] = "' .. v .. '",\n')
                     end
+                    file:write("}")
+                    file:close()
                 end
             end
         end
+
     else
         if user == "exit mainshell" then
             inmain = 0
