@@ -34,7 +34,7 @@ if installer == "1" then
         shell.run("cp /disk/* /startup.lua")
         shell.run("mkdir examples")
         file = io.open("examples/driver.lua", "w")
-        file:write("local driver = dofile('drivers.lua')\nfile_name = driver['a_driver']\nlocal variable,variable2 = dofile(file_name)\nprint('var: ' .. variable ' var2: ' .. variable2')
+        file:write("local driver = dofile('drivers.lua')\nfile_name = driver['a_driver']\nlocal variable,variable2 = dofile(file_name)")
     end
 end
 
