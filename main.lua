@@ -57,6 +57,9 @@ while true do
                         io.write("driver file path: ")
                         res1 = io.read()
                         drivers[res] = res1
+                        file = io.open("drivers.lua", "w")
+                        file:write(drivers)
+                        file:close()
                     end
                 else
                     io.write("create new driver system? y/n: ")
@@ -68,6 +71,9 @@ while true do
                         res1 = io.read()
                         drivers = {}
                         drivers[res] = res1
+                        file = io.open("drivers.lua", "w")
+                        file:write(drivers)
+                        file:close()
                     end
                 end
             end
