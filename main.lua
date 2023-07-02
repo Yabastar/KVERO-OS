@@ -1,6 +1,6 @@
 shell.run("clear")
 print("Welcome to KVERO OS!")
-print("version 00B")
+print("version 00C")
 location = "" -- to be used later
 inmain = 0
 
@@ -9,11 +9,9 @@ local configFile = "config.txt"
 -- Read the installer state from the configuration file
 local installer = "1" -- Default value if the file doesn't exist
 if fs.exists(configFile) then
-    
     local file = io.open(configFile, "r")
     installer = file:read()
     file:close()
-    
 end
 
 if installer == "1" then
@@ -58,8 +56,14 @@ while true do
                         io.write("driver file path: ")
                         res1 = io.read()
                         drivers[res] = res1
-                        file = io.open("drivers.lua", "w")
-                        file:write(tostring(drivers))
+                        
+                        -- Save the drivers table to a file
+                        local file = io.open("drivers.lua", "w")
+                        file:write("drivers = {\n")
+                        for k, v in pairs(drivers) do
+                            file:write('  ["' .. k .. '"] = "' .. v .. '",\n')
+                        end
+                        file:write("}")
                         file:close()
                     end
                 else
@@ -72,8 +76,14 @@ while true do
                         res1 = io.read()
                         drivers = {}
                         drivers[res] = res1
-                        file = io.open("drivers.lua", "w")
-                        file:write(tostring(drivers))
+                        
+                        -- Save the drivers table to a file
+                        local file = io.open("drivers.lua", "w")
+                        file:write("drivers = {\n")
+                        for k, v in pairs(drivers) do
+                            file:write('  ["' .. k .. '"] = "' .. v .. '",\n')
+                        end
+                        file:write("}")
                         file:close()
                     end
                 end
