@@ -40,7 +40,7 @@ while true do
     if inmain == 0 then
         if user == "mainshell" then
             inmain = 1
-        elif user == "driver mod" then
+        elseif user == "driver mod" then
             print("KVERO driver mod")
             if drivers then
                 io.write("drivers exist, create new driver? y/n: ")
