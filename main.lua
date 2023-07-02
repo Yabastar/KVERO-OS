@@ -38,7 +38,7 @@ end
 
 while true do
     io.write(location .. " > ")
-    print(shell.dir())
+    print(_ENV._PWD)
     user = io.read()
     if inmain == 0 then
         if user == "mainshell" then
