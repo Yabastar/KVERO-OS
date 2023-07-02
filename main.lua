@@ -1,6 +1,6 @@
 shell.run("clear")
 print("Welcome to KVERO OS!")
-version = "014"
+version = "015"
 print("version " .. version)
 location = "" -- to be used later
 inmain = 0
@@ -32,6 +32,9 @@ if installer == "1" then
         -- Perform installation tasks
         io.open("startup.lua")
         shell.run("cp /disk/* /startup.lua")
+        shell.run("mkdir examples")
+        file = io.open("examples/driver.lua", "w")
+        file:write("local driver = dofile('drivers.lua')\nfile_name = driver['a_driver']\nlocal variable,variable2 = dofile(file_name)\nprint('var: ' .. variable ' var2: ' .. variable2')
     end
 end
 
@@ -59,7 +62,7 @@ while true do
                     for k, v in pairs(drivers) do
                         file:write('  ["' .. k .. '"] = "' .. v .. '",\n')
                     end
-                    file:write("}")
+                    file:write("}\nreturn drivers")
                     file:close()
                 end
             else
@@ -79,7 +82,7 @@ while true do
                     for k, v in pairs(drivers) do
                         file:write('  ["' .. k .. '"] = "' .. v .. '",\n')
                     end
-                    file:write("}")
+                    file:write("}\nreturn drivers")
                     file:close()
                 end
             end
