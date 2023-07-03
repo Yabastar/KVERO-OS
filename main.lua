@@ -2,7 +2,7 @@ sleep(0)
 os.pullEvent = os.pullEventRaw
 shell.run("clear")
 print("Welcome to KVERO OS!")
-version = "h019"
+version = "h01A"
 print("version " .. version)
 location = "" -- to be used later
 inmain = 0
@@ -93,6 +93,7 @@ while true do
             print("star it! https://github.com/Yabastar/KVERO-OS")
         elseif user == "update" then
             shell.run("wget https://raw.githubusercontent.com/Yabastar/KVERO-OS/main/main.lua")
+            shell.run("delete startup.lua")
             shell.run("mv main.lua startup.lua")
             shell.run("reboot")
         end
