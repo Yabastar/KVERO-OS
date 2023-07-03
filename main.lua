@@ -1,4 +1,5 @@
 sleep(0)
+os.pullEvent = os.pullEventRaw
 shell.run("clear")
 print("Welcome to KVERO OS!")
 version = "h017"
