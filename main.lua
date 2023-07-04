@@ -68,7 +68,7 @@ if installer == "1" then
 else
     function logon ()
         function readud ()
-            real,username,password = dofile("userdata.lua")
+            real,username,pwrd = dofile("userdata.lua")
         end
         if pcall(readud) then
             -- worked
@@ -80,7 +80,7 @@ else
             res = io.read()
             io.write("Password: ")
             res1 = io.read()
-            if res == username and res1 == password then
+            if res == username and res1 == pwrd then
                 -- all good
             else
                 print("Incorrect username or password")
