@@ -88,6 +88,7 @@ else
             end
         end
     end
+    logon()
 end
             
 
