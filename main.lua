@@ -34,7 +34,7 @@ if installer == "1" then
             io.write("Create a user and password? [y/n] ")
             res = io.read()
             if res == "y" or res == "n" then
-                if res == "y"
+                if res == "y" then
                     io.write("Username: ")
                     res = io.read()
                     io.write("Password: ")
