@@ -2,7 +2,7 @@ sleep(0)
 os.pullEvent = os.pullEventRaw
 shell.run("clear")
 print("Welcome to KVERO OS!")
-version = "h01F"
+version = "h01B"
 print("version " .. version)
 location = "" -- to be used later
 inmain = 0
@@ -67,19 +67,21 @@ if installer == "1" then
     end
 else
     function logon()
-        local userData = nil
+        local userData = {}
         function readud()
-            return dofile("userdata.lua")
+            local file = io.open("userdata.lua", "r")
+            if file then
+                local data = file:read("*a")
+                file:close()
+                return load(data)()
+            end
+            return nil
         end
-        if pcall(readud) then
-            -- worked
-            userData = readud()
-        else
-            userData = dofile("userdata.lua")
-        end
-        if userData and userData.real ~= false then
-            username = userData.username
-            pwrd = userData.pwrd
+        userData = readud() or {}
+
+        if userData.real ~= false then
+            local username = userData.username
+            local pwrd = userData.pwrd
             io.write("Username: ")
             res = io.read()
             io.write("Password: ")
