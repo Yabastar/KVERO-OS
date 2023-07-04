@@ -30,15 +30,66 @@ if installer == "1" then
         local file = io.open(configFile, "w")
         file:write("0")
         file:close()
-        
+        while true do
+            io.write("Create a user and password? [y/n] ")
+            res = io.read()
+            if res == "y" or res == "n" then
+                if res == "y"
+                    io.write("Username: ")
+                    res = io.read()
+                    io.write("Password: ")
+                    res1 = io.read()
+                    io.write("Re-type password: ")
+                    res2 = io.read()
+                    if res1 == res2 then
+                        ud = io.open("userdata.lua", "w")
+                        ud:write("real=true\nusername=" .. res .. "\npwrd=" .. res1 .. "")
+                        ud:close()
+                        break
+                    else
+                        print("Passwords do not match!")
+                    end
+                else
+                    ud = io.open("userdata.lua", "w")
+                    ud:write("real=false")
+                    ud:close()
+                    break
+                end
+            end
+        end
         -- Perform installation tasks
         io.open("startup.lua")
         shell.run("cp /disk/* /startup.lua")
         shell.run("mkdir examples")
         file = io.open("examples/driver.lua", "w")
         file:write("local driver = dofile('drivers.lua')\nfile_name = driver['a_driver']\nlocal variable,variable2 = dofile(file_name)")
+        shell.run("reboot")
+    end
+else
+    function logon ()
+        function readud ()
+            real,username,password = dofile("userdata.lua")
+        end
+        if pcall(readud) then
+            -- worked
+        else
+            real = dofile("userdata.lua")
+        end
+        if real ~= false then
+            io.write("Username: ")
+            res = io.read()
+            io.write("Password: ")
+            res1 = io.read()
+            if res == username and res1 == password then
+                -- all good
+            else
+                print("Incorrect username or password")
+                logon()
+            end
+        end
     end
 end
+            
 
 while true do
     io.write(location .. " > ")
