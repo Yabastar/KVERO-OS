@@ -2,7 +2,7 @@ sleep(0)
 os.pullEvent = os.pullEventRaw
 shell.run("clear")
 print("Welcome to KVERO OS!")
-version = "h01A"
+version = "h01B"
 print("version " .. version)
 location = "" -- to be used later
 inmain = 0
