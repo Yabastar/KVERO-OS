@@ -84,6 +84,7 @@ else
                 -- all good
             else
                 print("Incorrect username or password")
+                print(.. username .. .. pwrd ..)
                 logon()
             end
         end
