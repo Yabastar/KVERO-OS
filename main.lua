@@ -2,7 +2,7 @@ sleep(0)
 os.pullEvent = os.pullEventRaw
 shell.run("clear")
 print("Welcome to KVERO OS!")
-version = "h020"
+version = "h021"
 print("version " .. version)
 location = "" -- to be used later
 inmain = 0
@@ -36,23 +36,29 @@ if installer == "1" then
             if res == "y" or res == "n" then
                 if res == "y" then
                     io.write("Username: ")
-                    res = io.read()
+                    local username = io.read()
                     io.write("Password: ")
-                    res1 = io.read()
+                    local password = io.read()
                     io.write("Re-type password: ")
-                    res2 = io.read()
-                    if res1 == res2 then
-                        ud = io.open("userdata.lua", "w")
-                        ud:write("real=true\nusername=" .. res .. "\npwrd=" .. res1 .. "")
-                        ud:close()
+                    local passwordConfirm = io.read()
+                    if password == passwordConfirm then
+                        local userData = {
+                            real = true,
+                            username = username,
+                            password = password
+                        }
+                        local file = io.open("userdata.lua", "w")
+                        file:write(textutils.serialize(userData))
+                        file:close()
                         break
                     else
                         print("Passwords do not match!")
                     end
                 else
-                    ud = io.open("userdata.lua", "w")
-                    ud:write("real=false")
-                    ud:close()
+                    local userData = { real = false }
+                    local file = io.open("userdata.lua", "w")
+                    file:write(textutils.serialize(userData))
+                    file:close()
                     break
                 end
             end
@@ -68,29 +74,25 @@ if installer == "1" then
 else
     function logon()
         local userData = {}
-        function readud()
-            local file = io.open("userdata.lua", "r")
-            if file then
-                local data = file:read("*a")
-                file:close()
-                return load(data)()
-            end
-            return nil
+        local file = io.open("userdata.lua", "r")
+        if file then
+            local data = file:read("*a")
+            file:close()
+            userData = textutils.unserialize(data) or {}
         end
-        userData = readud() or {}
 
         if userData.real ~= false then
             local username = userData.username
-            local pwrd = userData.pwrd
+            local password = userData.password
             io.write("Username: ")
             res = io.read()
             io.write("Password: ")
             res1 = io.read()
-            if res == username and res1 == pwrd then
+            if res == username and res1 == password then
                 -- all good
             else
                 print("Incorrect username or password")
-                print(username, pwrd)
+                print(username, password)
                 logon()
             end
         end
