@@ -2,7 +2,7 @@ sleep(0)
 os.pullEvent = os.pullEventRaw
 shell.run("clear")
 print("Welcome to KVERO OS!")
-version = "h01B"
+version = "h01D"
 print("version " .. version)
 location = "" -- to be used later
 inmain = 0
@@ -66,9 +66,9 @@ if installer == "1" then
         shell.run("reboot")
     end
 else
-    function logon ()
-        function readud ()
-            real,username,pwrd = dofile("userdata.lua")
+    function logon()
+        function readud()
+            return dofile("userdata.lua")
         end
         if pcall(readud) then
             -- worked
@@ -76,6 +76,9 @@ else
             real = dofile("userdata.lua")
         end
         if real ~= false then
+            local userData = readud()
+            username = userData.username
+            pwrd = userData.pwrd
             io.write("Username: ")
             res = io.read()
             io.write("Password: ")
@@ -91,7 +94,6 @@ else
     end
     logon()
 end
-            
 
 while true do
     io.write(location .. " > ")
@@ -158,4 +160,3 @@ while true do
         end
     end
 end
-
